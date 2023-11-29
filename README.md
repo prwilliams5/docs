@@ -19,15 +19,15 @@ physical network links and BGP sessions.
 ## Grafana Dashboards
 
 - Network
-- ESXi
-- Vcenter
-- VMs
+- Power
+- vCenter
+- Morpheus
 - Zabbix localhost
 
 ## Zabbix
 
 - Zabbix-Main-01
 
-- Zabbix-Proxy-01
+- Zabbix-Proxy-SLC-01
 
-- Zabbix-Proxy-01
+- Zabbix-Proxy-CHI-01
