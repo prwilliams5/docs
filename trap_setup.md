@@ -10,9 +10,11 @@ you have SSH access with root priveleges.
 vim /etc/zabbix/zabbix-server.conf
 ```
 
-#### Search for SNMP, you will find a section that looks like this
+### Search for SNMP
 
-Tip: To search in Vim, from normal mode, type `/string`. Replace 'string' with the desired text and press enter.
+Tip: To search in Vim, from normal mode, type `/string`. Replace `string` with the desired text and press enter.
+
+Search for `SNMP`, find the section that looks like this.
 
 ```bash
 ### Option: SNMPTrapperFile
@@ -44,11 +46,43 @@ SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
 
 #### Make 3 changes
 
-- Uncomment `# SNMPTrapperFile=/tmp/zabbix_traps.tmp`
-- Comment out `SNMPTrapperFile=/var/log/snmptrap/snmptrap.log`
-- Uncomment and change value from 0 to 1 `# StartSNMPTrapper=0`
+- Uncomment --> `# SNMPTrapperFile=/tmp/zabbix_traps.tmp`
+- Comment out --> `SNMPTrapperFile=/var/log/snmptrap/snmptrap.log`
+- Uncomment and change value from 0 to 1 --> `# StartSNMPTrapper=0`
 
-#### Restart Zabbix service
+It should now look like the following.
+
+```bash
+### Option: SNMPTrapperFile
+#       Temporary file used for passing data from SNMP trap daemon to the server.
+#       Must be the same as in zabbix_trap_receiver.pl or SNMPTT configuration file.
+#
+# Mandatory: no
+# Default:
+SNMPTrapperFile=/tmp/zabbix_traps.tmp
+
+# SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
+
+### Option: StartSNMPTrapper
+#       If 1, SNMP trapper process is started.
+#
+# Mandatory: no
+# Range: 0-1
+# Default:
+# StartSNMPTrapper=1
+
+### Option: ListenIP
+#       List of comma delimited IP addresses that the trapper should listen on.
+#       Trapper will listen on all network interfaces if this parameter is missing.
+#
+# Mandatory: no
+# Default:
+# ListenIP=0.0.0.0
+```
+
+After confirming changes, `:wq` + `return` to save and exit.
+
+### Restart Zabbix service
 
 ```bash
 systemctl restart zabbix-server
@@ -56,10 +90,10 @@ systemctl restart zabbix-server
 
 ## Zabbix trap receiver
 
-Place the following Perl script in /usr/bin/zabbix_trap_receiver.pl.
+Place the following Perl script in `/usr/bin/zabbix_trap_receiver.pl`.
 
 Note: This script is meant for Zabbix 6.0, please use the proper script for the version
-you are working with. Get it from Zabbix [here](https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/misc/snmptrap/zabbix_trap_receiver.pl).
+you are working with. Get it directly from Zabbix [here](https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/misc/snmptrap/zabbix_trap_receiver.pl).
 
 ```perl
 #!/usr/bin/perl
@@ -172,7 +206,7 @@ NetSNMP::TrapReceiver::register("all", \&zabbix_receiver) or
 print STDOUT "Loaded Zabbix SNMP trap receiver\n";
 ```
 
-#### Give script execute permissions
+### Give Perl script execute permissions
 
 ```bash
 chmod a+x /usr/bin/zabbix_trap_receiver.pl
@@ -190,22 +224,25 @@ apt install perl libxml-simple-perl libsnmp-perl
 apt install -y snmp snmp-mibs-downloader snmptrapd
 ```
 
-#### Edit snmptrapd config file
+### Edit snmptrapd config file
 
 ```bash
 vim /etc/snmp/snmptrapd.conf
 ```
 
-#### Add the following, make sure to replace 'public' with your community string
+#### Add the following
+
+Make sure to replace 'public' with the proper community string for your systems.
 
 ```bash
 authCommunity execute public
 perl do "/usr/bin/zabbix_trap_receiver.pl";
 ```
 
-#### Enable MIBs descriptions with received trap messages
+#### Enable MIB Descriptions
 
-This is optional but helps diagnose alerts quicker, edit snmp config file.
+Descriptions can be included with received trap messages. This is optional but
+helps diagnose alerts quicker, edit snmp config file.
 
 ```bash
 vim /etc/snmp/snmpd.conf
@@ -217,7 +254,7 @@ Comment out the following line so it looks like below.
 # mibs :
 ```
 
-#### Restart Zabbix and snmptrapd services
+### Restart Zabbix and snmptrapd services
 
 ```bash
 systemctl restart zabbix-server
