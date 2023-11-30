@@ -7,6 +7,10 @@
 #version: 1.0.0
 #date: 06-11-2021
 
+'''This script can be used to get all items from a host when a trap is triggered. Use
+of this script must be taken with caution as it may overload a host in critical moments.
+'''
+
 
 import json
 import sys
