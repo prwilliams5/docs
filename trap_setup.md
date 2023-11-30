@@ -215,7 +215,7 @@ chmod a+x /usr/bin/zabbix_trap_receiver.pl
 Note: If there are errors when running the Perl script, install the following.
 
 ```bash
-apt install perl libxml-simple-perl libsnmp-perl
+apt install -y perl libxml-simple-perl libsnmp-perl
 ```
 
 ## Install & configure snmptrapd
