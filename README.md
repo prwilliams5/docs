@@ -66,3 +66,21 @@ of the metrics collected by Zabbix. Common dashboard categories include:
 - Power
 - Systems
 - Software
+
+## Getting Started
+
+There are several documentation files to read through when building your environment, the best way to understand
+is to jump in and start configuring hosts, items, and triggers within Zabbix.
+
+### Installing Zabbix
+
+These docs are mainly meant to assist after Zabbix is installed, please use the [Official Documentation](https://zabbix.com/download)
+to install Zabbix. Make sure to select the proper options for your environment.
+
+### Hosts
+
+Start with the create_host.md doc before any others. You can not add items or triggers without them.
+
+### Items
+
+### Triggers
