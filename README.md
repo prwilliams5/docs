@@ -6,8 +6,13 @@ Perl, and Python scripting to provide live status updates of devices across mult
 
 ---
 
-Example of a Grafana dashboard monitoring a Zabbix server. Many different types of both virtual and
+## Example
+
+Grafana dashboard monitoring a Zabbix server. Many different types of both virtual and
 physical hosts can be monitored. The combination of Zabbix and Grafana can be both flexible and powerful.
+
+---
+
 ![Grafana Dashboard](./images/grafana-dash.png)
 
 ---
