@@ -1,8 +1,10 @@
 # SNMP Trap Set Up
 
-How to set up SNMP traps, it will walk through the process of setting up Zabbix for
-receiving traps. This assumes Zabbix is already installed on a Debian box and
-you have SSH access with root priveleges.
+How to set up SNMP traps, it will walk through the process of
+setting up Zabbix the Zabbix back-end for receiving traps. The front end
+will need further configuration on hosts you wish to obtain traps from.
+It is assumed Zabbix is already installed on a Debian box and you have SSH
+access with root priveleges.
 
 ## Edit zabbix-server.conf
 
@@ -12,7 +14,8 @@ vim /etc/zabbix/zabbix-server.conf
 
 ### Search for SNMP
 
-Tip: To search in Vim, from normal mode, type `/string`. Replace `string` with the desired text and press enter.
+Tip: To search in Vim, from normal mode, type `/string`. Replace `string` with
+the desired text and press enter.
 
 Search for `SNMP`, find the section that looks like this.
 
@@ -232,7 +235,7 @@ vim /etc/snmp/snmptrapd.conf
 
 #### Add the following
 
-Make sure to replace 'public' with the proper community string for your systems.
+Make sure to replace `public` with the proper community string for your systems.
 
 ```bash
 authCommunity execute public
@@ -261,8 +264,23 @@ systemctl restart zabbix-server
 systemctl restart snmptrapd
 ```
 
-This should now have the Zabbix server ready to receive traps from hosts, test with the following.
+This should now have the Zabbix server ready to receive traps from hosts, test
+locally with the following.
 
 ```bash
 snmptrap -v 2c -c public localhost '' 1.3.6.1.4.1.9.9.41.2 1.3.6.1.4.1.9.9.41.1.2.3.1.2 s "Test trap"
 ```
+
+You may want to test from a remote device as well. This should send a trap to the
+specified trap log file `/tmp/zabbix_traps.tmp` that was edited in zabbix-server.conf.
+Check recent contents with `tail` command.
+
+```bash
+tail -f /tmp/zabbix_traps.tmp
+```
+
+## Conclusion
+
+If there are issues refer to Zabbix documentation. More configuration related to regular
+expressions and Zabbix Triggers needs to be completed in the front end of Zabbix for
+traps to work properly with desired hosts.
