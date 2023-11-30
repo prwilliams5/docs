@@ -69,8 +69,8 @@ of the metrics collected by Zabbix. Common dashboard categories include:
 
 ## Getting Started
 
-There are several documentation files to read through when building your environment, the best way to understand
-is to jump in and start configuring hosts, items, and triggers within Zabbix.
+There are several documentation files in this repo to read through when building your environment,
+the best way to understand is to jump in and start configuring hosts, items, and triggers within Zabbix.
 
 ### Installing Zabbix
 
