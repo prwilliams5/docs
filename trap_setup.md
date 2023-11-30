@@ -69,7 +69,7 @@ SNMPTrapperFile=/tmp/zabbix_traps.tmp
 # Mandatory: no
 # Range: 0-1
 # Default:
-# StartSNMPTrapper=1
+StartSNMPTrapper=1
 
 ### Option: ListenIP
 #       List of comma delimited IP addresses that the trapper should listen on.
