@@ -4,12 +4,11 @@ This repo contains documentation for setting up a robust and scalable Zabbix/Gra
 monitoring environment. This stack utlilzes agent polling, SNMP traps, as well as Shell,
 Perl, and Python scripting to provide live status updates of devices across multiple sites.
 
----
+## Example Dashboard
 
-## Example
-
-Grafana dashboard monitoring a Zabbix server. Many different types of both virtual and
-physical hosts can be monitored. The combination of Zabbix and Grafana can be both flexible and powerful.
+Grafana dashboard monitoring a Linux server, this happens to be a Zabbix server.
+Many different types of both virtual and physical hosts can be monitored. The
+combination of Zabbix and Grafana can be both flexible and powerful.
 
 ---
 
